@@ -12,7 +12,7 @@ const router = new Router();
 
 app.use(require('koa-bodyparser')());
 
-router.post(config.bot_token, async (ctx, next) => {
+router.post(`/${config.bot_token}`, async (ctx, next) => {
   try {
     const { message: { text, chat: { id: chatId } }} = ctx.request.body;
 
