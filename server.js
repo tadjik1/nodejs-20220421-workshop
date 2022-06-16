@@ -29,4 +29,6 @@ router.post(config.bot_token, async (ctx, next) => {
   ctx.body = 'ok';
 });
 
+app.use(router.routes());
+
 app.listen(config.port);
