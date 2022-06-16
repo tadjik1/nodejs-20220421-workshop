@@ -2,14 +2,19 @@ const axios = require('axios');
 const config = require('./config');
 const logger = require('./logger');
 
-module.exports = async function sendMessage(chatId, text) {
+module.exports = async function sendMessage(chatId, text, parseMode) {
   try {
-    await axios.post(`https://api.telegram.org/bot${config.bot_token}/sendMessage`, {
+    const params = {
       chat_id: chatId,
       text,
-      parse_mode: 'HTML',
       disable_web_page_preview: true,
-    });
+    }
+
+    if (parseMode) {
+      params.parse_mode = parseMode;
+    }
+
+    await axios.post(`https://api.telegram.org/bot${config.bot_token}/sendMessage`, params);
   } catch (err) {
     logger.error(err);
   }
